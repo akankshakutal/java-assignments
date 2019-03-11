@@ -4,12 +4,12 @@ public class Player {
     private String name;
     private char symbol;
     private int[] moves;
-    private int index =0;
+    private int index = 0;
 
     public Player(String name, char symbol) {
         this.name = name;
         this.symbol = symbol;
-        this.moves = new int[3];
+        this.moves = new int[]{9, 9, 9, 9, 9};
     }
 
     public String getName() {
@@ -20,7 +20,7 @@ public class Player {
         return symbol;
     }
 
-    public void addMove(int move){
+    public void addMove(int move) {
         moves[index] = move;
         index++;
     }
