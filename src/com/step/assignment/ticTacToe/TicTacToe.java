@@ -1,29 +1,35 @@
 package com.step.assignment.ticTacToe;
 
+                                                                                                                                                                                                                
 
-import jdk.swing.interop.SwingInterOpUtils;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 class TicTacToe {
-    private Player player1;
-    private Player player2;
+    private List<Player> players;
+    private List<List> winningCombinations;
     private Player currentPlayer;
-    private char[] board;
     public boolean isEmpty = true;
-    private int[][] winningChances = new int[][]{{0, 1, 2}, {3, 4, 5}, {6, 7, 8}, {0, 3, 6}, {1, 4, 7}, {2, 5, 8}, {0, 4, 8}, {2, 4, 6}};
+    private char[] board = new char[]{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
 
-    public TicTacToe(Player player1, Player player2) {
-        this.player1 = player1;
-        this.player2 = player2;
-        this.currentPlayer = this.player1;
-        this.board = new char[]{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
+    public TicTacToe(Player player1,Player player2) {
+        this.players = new ArrayList<>(2);
+        this.players.add(player1);
+        this.players.add(player2);
+        winningCombinations = new ArrayList<>(8);
+        winningCombinations.add(Arrays.asList(0, 1, 2));
+        winningCombinations.add(Arrays.asList(3, 4, 5));
+        winningCombinations.add(Arrays.asList(6, 7, 8));
+        winningCombinations.add(Arrays.asList(0, 3, 6));
+        winningCombinations.add(Arrays.asList(1, 4, 7));
+        winningCombinations.add(Arrays.asList(2, 5, 8));
+        winningCombinations.add(Arrays.asList(0, 4, 8));
+        winningCombinations.add(Arrays.asList(2, 4, 6));
+        this.currentPlayer = players.get(0);
     }
 
-
-    public void changeTurn() {
-        currentPlayer = (currentPlayer == player1) ? player2 : player1;
-    }
-
-    public void putSign(int x) {
+    public void makeMove(int x) {
         if (x < 0 || x > 9) {
             System.out.println("Invalid board position");
             return;
@@ -36,37 +42,35 @@ class TicTacToe {
         this.currentPlayer.addMove(x);
     }
 
-    public boolean areEqual(int winningMove[], int playerMoves[]) {
-        int winningCount = 0;
-        for (int index = 0; index < winningMove.length; index++) {
-            for (int move = 0; move < playerMoves.length; move++) {
-                if (playerMoves[move] == winningMove[index]) {
-                    winningCount++;
-                    break;
-                }
-            }
-        }
-        return winningCount == 3;
+    public boolean hasWon(Player player) {
+        return winningCombinations.stream().anyMatch(moveSet -> player.getMoves().containsAll(moveSet));
     }
 
 
-    public boolean hasWon(Player player) {
-        for (int i = 0; i < winningChances.length; i++) {
-            if (areEqual(winningChances[i], player.getMoves())) {
-                return true;
-            }
-        }
-        return false;
+    private void changeTurn() {
+        this.currentPlayer = this.currentPlayer==players.get(0) ? players.get(1):players.get(0);
     }
 
     public void displayWinner() {
         if (hasWon(currentPlayer)) {
             System.out.println(currentPlayer.getName() + " Won...!");
             isEmpty = false;
-        } else if (!isEmpty) {
-            System.out.println("its a tie");
+            return;
+        }
+
+        int player1Moves = players.get(0).getMoves().size();
+        int player2Moves = players.get(1).getMoves().size();
+
+        if(player1Moves+player2Moves == 9 && isEmpty){
+            System.out.println(" Game Draw...!");
+            isEmpty = false;
+            return;
         }
         changeTurn();
+    }
+
+    public Player getCurrentPlayer() {
+        return currentPlayer;
     }
 
     public void printBoard() {
@@ -77,9 +81,5 @@ class TicTacToe {
                 System.out.print(" |\n -------------\n");
             }
         }
-    }
-
-    public Player getCurrentPlayer() {
-        return currentPlayer;
     }
 }

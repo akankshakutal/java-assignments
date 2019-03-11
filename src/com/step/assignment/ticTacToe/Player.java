@@ -1,15 +1,17 @@
 package com.step.assignment.ticTacToe;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Player {
     private String name;
     private char symbol;
-    private int[] moves;
-    private int index = 0;
+    private List moves;
 
     public Player(String name, char symbol) {
         this.name = name;
         this.symbol = symbol;
-        this.moves = new int[]{9, 9, 9, 9, 9};
+        this.moves = new ArrayList<Integer>();
     }
 
     public String getName() {
@@ -20,12 +22,11 @@ public class Player {
         return symbol;
     }
 
-    public void addMove(int move) {
-        moves[index] = move;
-        index++;
+    public void addMove(Integer move) {
+        moves.add(move);
     }
 
-    public int[] getMoves() {
+    public List getMoves() {
         return moves;
     }
 }

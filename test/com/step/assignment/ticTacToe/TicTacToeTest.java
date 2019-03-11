@@ -23,14 +23,6 @@ class TicTacToeTest {
     }
 
 
-    @Test
-    void areEqual() {
-        boolean actual = ticTacToe.areEqual(new int[]{1,2,3},new int[]{1,2,3});
-        assertEquals(true,actual);
-        actual = ticTacToe.areEqual(new int[]{1,2,5},new int[]{4,6,7});
-        assertEquals(false,actual);
-        actual = ticTacToe.areEqual(new int[]{1,2,3},new int[]{1,2,4});
-        assertEquals(false,actual);
-    }
+
 
 }

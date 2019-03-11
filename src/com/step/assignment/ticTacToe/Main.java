@@ -1,6 +1,5 @@
 package com.step.assignment.ticTacToe;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -27,10 +26,11 @@ public class Main {
             Player currentPlayer = ticTacToe.getCurrentPlayer();
             System.out.println(currentPlayer.getName() +"'s turn");
             x=scanner.nextInt();
-            ticTacToe.putSign(x);
+            ticTacToe.makeMove(x);
             ticTacToe.printBoard();
             ticTacToe.displayWinner();
 
         }while(ticTacToe.isEmpty);
     }
+
 }
