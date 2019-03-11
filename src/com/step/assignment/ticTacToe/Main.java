@@ -22,15 +22,13 @@ public class Main {
         System.out.println(player2Name+" your Symbol is O");
 
         int x=0;
-        do {
+        while (ticTacToe.isEmpty){
             Player currentPlayer = ticTacToe.getCurrentPlayer();
             System.out.println(currentPlayer.getName() +"'s turn");
             x=scanner.nextInt();
             ticTacToe.makeMove(x);
             ticTacToe.printBoard();
-            ticTacToe.displayWinner();
-
-        }while(ticTacToe.isEmpty);
+        }
     }
 
 }

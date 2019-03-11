@@ -40,10 +40,8 @@ class TicTacToe {
         }
         board[x] = currentPlayer.getSymbol();
         this.currentPlayer.addMove(x);
-    }
-
-    public boolean hasWon(Player player) {
-        return winningCombinations.stream().anyMatch(moveSet -> player.getMoves().containsAll(moveSet));
+        this.displayWinner();
+        changeTurn();
     }
 
 
@@ -51,8 +49,8 @@ class TicTacToe {
         this.currentPlayer = this.currentPlayer==players.get(0) ? players.get(1):players.get(0);
     }
 
-    public void displayWinner() {
-        if (hasWon(currentPlayer)) {
+    private void displayWinner() {
+        if (currentPlayer.hasWon(winningCombinations)) {
             System.out.println(currentPlayer.getName() + " Won...!");
             isEmpty = false;
             return;
@@ -66,7 +64,6 @@ class TicTacToe {
             isEmpty = false;
             return;
         }
-        changeTurn();
     }
 
     public Player getCurrentPlayer() {
