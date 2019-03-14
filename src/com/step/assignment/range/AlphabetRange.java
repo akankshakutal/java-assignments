@@ -2,9 +2,9 @@ package com.step.assignment.range;
 
 
 
-public class AlphabatRange extends Range<Character> {
+public class AlphabetRange extends Range<Character> {
 
-    public AlphabatRange(Character start, Character end) {
+    public AlphabetRange(Character start, Character end) {
         super(start, end);
         this.createList();
     }
