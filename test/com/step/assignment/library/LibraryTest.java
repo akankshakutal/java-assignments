@@ -35,9 +35,9 @@ class LibraryTest {
     @Test
     void removeBook() {
         Book book1 = new Book("oop");
-        assertTrue(library.removeBook(librarian, book));
-        assertFalse(library.removeBook(librarian1, book));
-        assertFalse(library.removeBook(librarian, book1));
+        assertTrue(library.removeBook(librarian, "C"));
+        assertFalse(library.removeBook(librarian1, "C"));
+        assertFalse(library.removeBook(librarian, "c++"));
     }
 
     @Test

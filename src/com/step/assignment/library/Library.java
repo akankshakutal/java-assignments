@@ -37,7 +37,8 @@ public class Library {
         return false;
     }
 
-    public boolean removeBook(Librarian librarian, Book book) {
+    public boolean removeBook(Librarian librarian, String bookName) {
+        Book book = searchBook(bookName);
         if (validateLibrarian(librarian) && availableBooks.contains(book)) {
             availableBooks.remove(book);
             return true;
